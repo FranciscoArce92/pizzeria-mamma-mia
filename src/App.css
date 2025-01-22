@@ -1,6 +1,11 @@
 * {
   text-align: center;
 }
+/* 
+#root {
+  height: 100vw;
+} */
+
 ul {
   list-style-type: none;
 }
