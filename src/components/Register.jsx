@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { use } from "react";
+import {
+  validateRequiredFields,
+  validatePasswordLength,
+  validatePasswordMatch,
+} from "../utils/validations";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -10,74 +14,89 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //Validaciones
-    if (!email || !password || !confirmPassword) {
-      setMessage("Todos los campos son obligatorios");
-      return;
-    }
-    if (password.length < 6) {
-      setMessage("La contraseña debe tener mínimo 6 caracteres");
-      return;
-    }
-
-    if (password != confirmPassword) {
-      setMessage("Las contraseñas no coinciden");
+    //Validar campos requeridos
+    const requiredFieldsError = validateRequiredFields({
+      email,
+      password,
+      confirmPassword,
+    });
+    if (requiredFieldsError) {
+      setMessage(requiredFieldsError);
       return;
     }
 
-    setMessage("Registro exitoso");
+    //Validar longitud de la contraseña
+    const passwordLengthError = validatePasswordLength(password);
+    if (passwordLengthError) {
+        setMessage(passwordLengthError);
+        return;
+    }
+
+    //Validar coincidencia de contraseñas
+    const passwordMatchError = validatePasswordMatch(password, confirmPassword);
+    if (passwordMatchError) {
+        setMessage(passwordMatchError);
+        return;
+    }
+
+    //Si todo es correcto
+    setMessage('Regitro exitoso')
   };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Correo electrónico
-        </label>
-        <input
-          type="email"
-          className="form-control"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="password" className="form-label">
-          Contraseña
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="confirmPassword" className="form-label">
-          Confirmar contraseña
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">
-        Registrarse
-      </button>
-      {message && (
-        <div
-          className={`alert mt-3 ${
-            message === "Registro exitoso." ? "alert-success" : "alert-danger"
-          }`}
-        >
-          {message}
+    <>
+      <h2 className="my-3">Register</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Correo electrónico
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
-      )}
-    </form>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Contraseña
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="confirmPassword" className="form-label">
+            Confirmar contraseña
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Registrarse
+        </button>
+        {message && (
+          <div
+            className={`alert mt-3 ${
+              message === "Registro exitoso." ? "alert-success" : "alert-danger"
+            }`}
+          >
+            {message}
+          </div>
+        )}
+      </form>
+    </>
   );
 }
 
