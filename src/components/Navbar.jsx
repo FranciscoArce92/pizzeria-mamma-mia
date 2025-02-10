@@ -23,12 +23,7 @@ const Navbar = () => {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
               <Link className="nav-link active" to="/">
-                <img
-                  src="./src/assets/img/pizza.png"
-                  className="img-fluid rounded-top"
-                  width="20px"
-                  alt="Home"
-                />{" "}
+                🍕{" "}
                 Home
               </Link>
               </li>
@@ -85,12 +80,7 @@ const Navbar = () => {
 
               <span className="navbar-text ms-auto">
               <Link to="/cart" className="text-decoration-none text-dark">
-              <img
-                src="./src/assets/img/icons8-carrito-de-compras-30.png"
-                width="20px"
-                alt="Carrito de compras"
-                className="me-2"
-              />
+              🛒
               <strong>Total: ${total.toLocaleString()}</strong>
             </Link>
               </span>
