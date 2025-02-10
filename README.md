@@ -11,5 +11,14 @@
 > ![image](https://github.com/user-attachments/assets/2c45bc29-ebf0-4baf-85ae-07324f5c30d9)
 > ![image](https://github.com/user-attachments/assets/a26885a5-1638-4bc9-8c89-7c0001287f86)
 
+> Cuarto Hito
+>
+> **Renderizar las pizzas desde el backend:**
+> ![image](https://github.com/user-attachments/assets/a0d08804-7218-4513-89a9-6aed2dbda949)
+> ![image](https://github.com/user-attachments/assets/9174f342-42c0-48da-afea-4c0a64282b88)
+> ![image](https://github.com/user-attachments/assets/cc2d5d58-3ce1-4195-8343-c81a35008fcb)
+
+
+
 
 
