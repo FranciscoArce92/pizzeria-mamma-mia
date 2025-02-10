@@ -1,5 +1,5 @@
-import Header from "./Header";
-import CardPizza from "./CardPizza";
+import Header from "../components/Header.jsx";
+import CardPizza from "../components/CardPizza.jsx";
 import { pizzas } from "../js/pizzas.js";
 
 function Home() {

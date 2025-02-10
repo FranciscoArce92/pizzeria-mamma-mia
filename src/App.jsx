@@ -1,24 +1,34 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
 import Footer from './components/Footer'
-import Home from './components/Home'
-import Login from './components/Login'
+import Home from './pages/Home'
+import Login from './pages/Login'
 import Navbar from './components/Navbar'
-import Register from './components/Register'
-import Cart from './components/Cart'
-import Pizzas from './components/Pizzas'
+import Register from './pages/Register'
+import Cart from './pages/Cart'
+import Pizzas from './pages/Pizzas'
+import Prole from './components/Prole';
+import NotFound from './components/NotFound';
 
 function App() {
   
 
   return (
     <>
+     <Router>
       <Navbar />
-      {/* <Home /> */}
-      {/* <Register />
-      <Login /> */}
-      {/* <Cart /> */}
-      <Pizzas />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path='register' element={<Register />} />
+        <Route path='login' element={<Login />} />
+        <Route path='cart' element={<Cart />} />
+        <Route path='pizzas/:id' element={<Pizzas />} />
+        <Route path='prole' element={<Prole />} />
+        <Route path='404' element={<NotFound />}/>
+        <Route path='*' element={<NotFound />}/>
+      </Routes>
+     </Router>
+     <Footer />
       
     </>
   )
