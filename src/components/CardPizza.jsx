@@ -1,6 +1,6 @@
-// import React from 'react'
 
-function CardPizza({ name, price, ingredients, img }) {
+
+function CardPizza({ name, desc, price, ingredients, img }) {
 
   return (
     <div className="card text-center" style={{ width: "18rem" }}>
@@ -8,6 +8,7 @@ function CardPizza({ name, price, ingredients, img }) {
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <hr />
+        <p className="card-text">{desc}</p>
         <h6>Ingredientes:</h6>
         <ul>
           {ingredients.map((ingredient, index) => (

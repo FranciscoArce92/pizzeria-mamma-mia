@@ -1,10 +1,10 @@
 * {
   text-align: center;
 }
-/* 
+
 #root {
-  height: 100vw;
-} */
+  background-color: rgb(216, 208, 191);
+}
 
 ul {
   list-style-type: none;
