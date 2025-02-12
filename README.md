@@ -1,4 +1,4 @@
-# Pizerría Mamma Mía!
+# Pizzería Mamma Mía!
 
 ## Proyecto con hitos para el módulo de React de la generación 85 de DesafíoLatam!
 
