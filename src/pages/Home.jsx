@@ -1,8 +1,11 @@
 import Header from "../components/Header.jsx";
 import CardPizza from "../components/CardPizza.jsx";
-import { pizzas } from "../js/pizzas.js";
+import { usePizza } from "../context/PizzaContext.jsx";
+import { useCart } from "../context/CartContext.jsx";
 
-function Home() {
+const Home = () => {
+  const { pizzas } = usePizza();
+  const { addToCart } = useCart();
   return (
     <>
       <Header />
@@ -10,11 +13,13 @@ function Home() {
         {pizzas.map((pizza) => (
           <CardPizza
             key={pizza.id}
+            id={pizza.id}
             img={pizza.img}
             name={pizza.name}
             desc={pizza.desc}
             price={pizza.price}
             ingredients={pizza.ingredients}
+            onAddToCart={() => addToCart(pizza)}
           />
         ))}
       </div>
