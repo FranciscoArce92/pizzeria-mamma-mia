@@ -32,7 +32,7 @@ const Pizzas = () => {
   if (!pizza) return <p>No se encontró la pizza.</p>;
 
   return (
-    <div className="card m-auto" style={{ width: "18rem" }}>
+    <div className="card m-auto mt-5" style={{ width: "18rem" }}>
       <img src={pizza.img} className="card-img-top" alt={pizza.name} />
       <div className="card-body">
         <h5 className="card-title">{pizza.name}</h5>

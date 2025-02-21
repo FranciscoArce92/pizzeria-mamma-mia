@@ -15,6 +15,12 @@ ul {
   background-size: cover;
   background-position: center;
   height: 100%;
-  
-  
+}
+
+.p-70 {
+  padding-top: 70px;
+}
+
+.m-70 {
+  margin-top: 70px;
 }

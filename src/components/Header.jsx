@@ -2,7 +2,7 @@
 
 function Header() {
   return (
-    <div className="header text-white p-4 text-center">
+    <div className="header text-white p-4 text-center mt-5">
         <h1 className="fs-3">¡Pizzería Mamma Mía!</h1>
         <p className="fs-5">Tenemos las mejores pizzas que podrás encontrar!</p>
     </div>
