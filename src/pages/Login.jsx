@@ -1,36 +1,32 @@
 import React, { useState } from "react";
-import { validateRequiredFields, validatePasswordLength } from "../utils/validations";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 
 function Login() {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
-    const [ message, setMessage ] = useState('');
+    const [ message, setMessage ] = useState('')
+    const { login } = useUser();
+    const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setMessage("");
 
-        //Validar campos requeridos
-        const requiredFieldsError = validateRequiredFields({ email, password });
-        if (requiredFieldsError) {
-            setMessage(requiredFieldsError);
-            return;
+        const success = await login(email, password);
+        if (success) {
+          setMessage("Inicio de sesión exitoso.");
+          setTimeout(() => navigate("/prole"), 1000); 
+        } else {
+          setMessage("Error: Verifica tu correo y contraseña.");
         }
-
-        //Validar longitud de contraseña
-        const passwordLengthError = validatePasswordLength(password);
-        if (passwordLengthError) {
-            setMessage(passwordLengthError);
-            return;
-        }
-
-        //Si todo es correcto
-        setMessage('Inicio de sesión exitoso')
     }
   return (
+
     <>
     <h2 className='my-3'>Login</h2>
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="email" className="form-label">Correo electrónico</label>
         <input
@@ -59,7 +55,8 @@ function Login() {
       )}
     </form>
     </>
+
   );
 }
 
-export default Login
+export default Login;

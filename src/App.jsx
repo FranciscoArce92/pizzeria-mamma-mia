@@ -18,48 +18,40 @@ import RedirectIfAuth from "./components/RedirectIfAuth.jsx";
 function App() {
   return (
     <>
+    <Router>
       <UserProvider>
         <PizzaProvider>
           <CartProvider>
-            <Router>
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route
-                  path="prole"
-                  element={
-                    <ProtectedRoute>
-                      <Prole />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="login"
-                  element={
-                    <RedirectIfAuth>
-                      <Login />
-                    </RedirectIfAuth>
-                  }
-                />
-                <Route
-                  path="register"
-                  element={
-                    <RedirectIfAuth>
-                      <Register />
-                    </RedirectIfAuth>
-                  }
-                />
-
-                <Route path="cart" element={<Cart />} />
-                <Route path="pizzas/:id" element={<PizzaDetail />} />
-                <Route path="404" element={<NotFound />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              <Footer />
-            </Router>
+            <Navbar />
+            <Routes>
+              <Route
+                path="login"
+                element={
+                  <RedirectIfAuth>
+                    <Login />
+                  </RedirectIfAuth>
+                }
+              />
+              <Route
+                path="register"
+                element={
+                  <RedirectIfAuth>
+                    <Register />
+                  </RedirectIfAuth>
+                }
+              />
+              <Route path="/" element={<Home />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="pizzas/:id" element={<PizzaDetail />} />
+              <Route path="prole" element={<ProtectedRoute><Prole /></ProtectedRoute>} />
+              <Route path="404" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
           </CartProvider>
         </PizzaProvider>
       </UserProvider>
+    </Router>
     </>
   );
 }

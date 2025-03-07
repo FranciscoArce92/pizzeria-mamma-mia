@@ -5,7 +5,7 @@ const RedirectIfAuth = ({ children }) => {
     const { token } = useUser();
 
     if (token) {
-        return <Navigate to="/" replace />
+        return <Navigate to="/" />
     }
 
     return children

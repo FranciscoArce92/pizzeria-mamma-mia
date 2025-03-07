@@ -1,51 +1,37 @@
 import React, { useState } from "react";
-import {
-  validateRequiredFields,
-  validatePasswordLength,
-  validatePasswordMatch,
-} from "../utils/validations";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
+  const { register } = useUser();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage("");
 
-    //Validar campos requeridos
-    const requiredFieldsError = validateRequiredFields({
-      email,
-      password,
-      confirmPassword,
-    });
-    if (requiredFieldsError) {
-      setMessage(requiredFieldsError);
+    if (password !== confirmPassword) {
+      setMessage("Las contraseñas no coinciden.");
       return;
     }
 
-    //Validar longitud de la contraseña
-    const passwordLengthError = validatePasswordLength(password);
-    if (passwordLengthError) {
-        setMessage(passwordLengthError);
-        return;
-    }
+    const success = await register(email, password);
 
-    //Validar coincidencia de contraseñas
-    const passwordMatchError = validatePasswordMatch(password, confirmPassword);
-    if (passwordMatchError) {
-        setMessage(passwordMatchError);
-        return;
+    if (success) {
+      setMessage("Registro exitoso.");
+      setTimeout(() => navigate("/prole"), 1000);
+    } else {
+      setMessage("Error: No se pudo completar el registro.");
     }
-
-    //Si todo es correcto
-    setMessage('Regitro exitoso')
   };
 
   return (
     <>
-      <h2 className="my-3">Register</h2>
+      <h2 className="my-3">Registro</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -57,6 +43,7 @@ function Register() {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
         <div className="mb-3">
@@ -69,6 +56,7 @@ function Register() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <div className="mb-3">
@@ -81,17 +69,15 @@ function Register() {
             id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">
           Registrarse
         </button>
+
         {message && (
-          <div
-            className={`alert mt-3 ${
-              message === "Registro exitoso." ? "alert-success" : "alert-danger"
-            }`}
-          >
+          <div className={`alert mt-3 ${message === "Registro exitoso." ? "alert-success" : "alert-danger"}`}>
             {message}
           </div>
         )}
